@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout">
+<body>
+<div layout:fragment="content">
+<form class="ui large form" method="POST">
+	<div class="ui grid center aligned">
+		<div class="fluid sixteen wide column">
+			<table id="productexample" class="display nowrap" style="width:100%  !important;">
+				<thead>
+					<tr style="text-align:center">
+						<th>code</th>
+						<th>품명</th>
+						<th>규격</th>
+						<th>구분</th>
+						<th>전년</th>
+						<th>1월</th>
+						<th>2월</th>
+						<th>3월</th>
+						<th>4월</th>
+						<th>5월</th>
+						<th>6월</th>
+						<th>7월</th>
+						<th>8월</th>
+						<th>9월</th>
+						<th>10월</th>
+						<th>11월</th>
+						<th>12월</th>
+						<th>현재고</th>
+						<th>Option</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="product : ${products}" style="text-align:center">
+						<td th:text="${product.code}" th:onclick="'location.href=\''+@{productUpdate(code=${product.code})}+'\';'" style="cursor:pointer"></td>
+						<td th:text="${product.name}"></td>
+						<td th:text="${product.capacity}"></td>
+						<td>
+							<div style="background-color:#0275d8;color:#ffffff">매입</div>
+							<div style="background-color:#0275d8;color:#ffffff">매출</div>
+						</td>
+						<td>
+							<div th:text="${product.preyystock}"></div>
+						</td>
+						<td>
+							<div th:text="${product.buy01}"></div>
+							<div th:text="${product.sale01}"></div>
+						</td>
+						<td>
+							<div th:text="${product.buy02}"></div>
+							<div th:text="${product.sale02}"></div>
+						</td>
+						<td>
+							<div th:text="${product.buy03}"></div>
+							<div th:text="${product.sale03}"></div>
+						</td>
+						<td>
+							<div th:text="${product.buy04}"></div>
+							<div th:text="${product.sale04}"></div>
+						</td>
+						<td>
+							<div th:text="${product.buy05}"></div>
+							<div th:text="${product.sale05}"></div>
+						</td>
+						<td>
+							<div th:text="${product.buy06}"></div>
+							<div th:text="${product.sale06}"></div>
+						</td>
+						<td>
+							<div th:text="${product.buy07}"></div>
+							<div th:text="${product.sale07}"></div>
+						</td>
+						<td>
+							<div th:text="${product.buy08}"></div>
+							<div th:text="${product.sale08}"></div>
+						</td>
+						<td>
+							<div th:text="${product.buy09}"></div>
+							<div th:text="${product.sale09}"></div>
+						</td>
+						<td>
+							<div th:text="${product.buy10}"></div>
+							<div th:text="${product.sale10}"></div>
+						</td>
+						<td>
+							<div th:text="${product.buy11}"></div>
+							<div th:text="${product.sale11}"></div>
+						</td>
+						<td>
+							<div th:text="${product.buy12}"></div>
+							<div th:text="${product.sale12}"></div>
+						</td>
+						 
+						<td>
+							<input type="text" th:value="${product.stock}" style="width:30px;font-size:9px">
+						</td>
+						<td>
+							<i class="edit outline icon primary" title="update" id="producteditbtn"></i>
+							<i class="trash alternate outline icon red" title="delete" id="productdeletebtn"></i>
+						</td>
+					</tr>
+		        </tbody>
+			</table>
+		</div>
+		
+		<div class="ui mini modal productdeletemodal">
+			<div class="header"  style="text-align:center">정보 삭제</div>
+			<div class="image content">
+				<div class="description">
+					<p  style="text-align:center">삭제 하시겠습니까?</p>
+				</div>
+			</div>
+			<div class="center" style="text-align:center">
+				<button type="button" id="producedeleteok">삭제</button>
+				<button type="button" id="productdeletecancel">취소</button>
+				<p><p>
+			</div>
+		</div>
+		
+		<div class="ui success message" id="successmessage" style="display:none">
+            <div class="header" id="resultmessage"></div>
+        </div>
+		
+	</div>
+</form>		
+</div>
+</body>
+</html>
+

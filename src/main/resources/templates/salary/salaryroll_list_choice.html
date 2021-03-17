@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout">
+<body>
+<div layout:fragment="content">
+<form class="ui large form" id="salaryTexForm" name="salaryTexForm" method="POST" action="salaryRollList">
+	<div class="ui grid center aligned">
+		<div class="five wide column">
+		</div>
+		
+		<div class="five wide column">
+			<div class="fluid center aligned" style="margin-top:50px">
+				<h3><i class="strikethrough icon"></i> SalaryRoll 검색 </h3>
+			</div>
+			
+			<div class="fluid" style="margin-top:20px">
+				<div class="ui labeled input  center aligned">
+			  		<div class="ui label">
+				    	 처리년도
+				  	</div>
+				  	<select class="ui search  dropdown" name="yyyy" >
+	  					<option th:each="yyyy : ${yyyys}" th:selected="${yyyy eq thisyyyy}" th:value="${yyyy}" th:text="${yyyy}"></option>
+	  				</select>
+				</div>	
+			</div>
+			
+			<div class="fluid" style="margin-top:20px">
+				<div class="ui labeled input  center aligned">
+			  		<div class="ui label">
+				    	 처리&nbsp&nbsp&nbsp&nbsp 월
+				  	</div>
+				  	<select class="ui search  dropdown" name="mm" >
+	  					<option th:each="mm : ${mms}" th:selected="${mm eq thismm}" th:value="${mm}" th:text="${mm}"></option>
+	  				</select>
+				</div>	
+			</div>
+			
+			<div class="fluid" style="margin-top:20px">
+				<button type="submit" class="ui primary basic button">검색</button>
+				<button type="button" class="ui secondary basic button" onclick="location.href='index'">취소</button>
+			</div>
+		</div>
+		
+		<div class="five wide column">
+		</div>
+	</div>
+</form>		
+</div>
+</body>
+</html>
+

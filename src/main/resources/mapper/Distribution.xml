@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.naver.dgkim1007.dao.DistributionDao">
+
+	<select id="balanceelectOne" resultType="com.naver.dgkim1007.entities.Balance">
+		select * from balance where yyyy=#{yyyy} and vendcode=#{vendcode}
+	</select>
+	
+	<update id="balanceUpdateRow">
+		update balance set 
+		preyybalance=#{preyybalance},prebalance01=#{prebalance01},
+		prebalance02=#{prebalance02},prebalance03=#{prebalance04},
+		prebalance04=#{prebalance04},prebalance05=#{prebalance05},
+		prebalance06=#{prebalance06},prebalance07=#{prebalance07},
+		prebalance08=#{prebalance08},prebalance09=#{prebalance09},
+		prebalance10=#{prebalance10},prebalance11=#{prebalance11},
+		prebalance12=#{prebalance12},deal01=#{deal01},deal02=#{deal02},
+		deal03=#{deal03},deal04=#{deal04},deal05=#{deal05},deal06=#{deal06},
+		deal07=#{deal07},deal08=#{deal08},deal09=#{deal09},deal10=#{deal10},
+		deal11=#{deal11},deal12=#{deal12},pay01=#{pay01},pay02=#{pay02},
+		pay03=#{pay03},pay04=#{pay04},pay05=#{pay05},pay06=#{pay06},
+		pay07=#{pay07},pay08=#{pay08},pay09=#{pay09},pay10=#{pay10},
+		pay11=#{pay11},pay12=#{pay12},balance01=#{balance01},balance02=#{balance02},
+		balance03=#{balance03},balance04=#{balance04},balance05=#{balance05},
+		balance06=#{balance06},balance07=#{balance07},balance08=#{balance08},
+		balance09=#{balance09},balance10=#{balance10},balance11=#{balance11},
+		balance12=#{balance12},balance=#{balance}
+		where yyyy=#{yyyy} and vendcode=${vendcode}
+	</update>
+	
+	<select id="balanceList" resultType="com.naver.dgkim1007.entities.Balance">
+		select *,(select 2022 from dual) newyyyy from balance where yyyy=#{yyyy}
+	</select>
+	
+	<select id="venderSelectOne" resultType="com.naver.dgkim1007.entities.Vender">
+		select * from vender where codede=#{code}
+	</select>
+	
+	<select id="balanceSelectOne" resultType="com.naver.dgkim1007.entities.Balance">
+		select * from balance where yyyy=#{yyyy} and vendcode=#{vendcode}
+	</select>
+	
+	<update id="balanceUpdateAjax">
+		update balance set balance=#{balance} 
+		where yyyy=#{yyyy} and vendcode=#{vendcode}
+	</update>
+	
+	<delete id="balanceDeleteAjax">
+		delete from balance where yyyy=#{yyyy} and vendcode=#{vendcode}
+	</delete>
+	
+	<update id="balanceMMFinal">
+		update balance set ${columnpre}=balance,${columnbalance}=balance
+		where yyyy=#{yyyy}
+	</update>
+	
+	<delete id="balanceYYFinalBeforeDelete">
+		delete from balance where yyyy=#{nextyyyy}
+	</delete>
+	
+	<insert id="balanceYYFinal">
+		insert into balance(yyyy,vendcode,vendname,preyybalance,prebalance01,balance,balance01)
+		values
+		<foreach collection="balances" item="item" separator=" , ">
+		(#{item.newyyyy},#{item.vendcode},#{item.vendname},#{item.balance},#{item.balance},
+		#{item.balance},#{item.balance})
+		</foreach>
+	</insert>
+	
+</mapper>

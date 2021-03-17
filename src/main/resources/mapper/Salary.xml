@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.naver.dgkim1007.dao.SalaryDao">
+
+	<select id="selectOne" resultType="com.naver.dgkim1007.entities.Salary">
+		select * from Salary where empno=#{empno}
+	</select>
+	
+	<insert id="insertRow">
+		insert into Salary (empno,depart,name, partner, dependent20,dependent60,disabled, 
+		womanpower,pay,extra
+		)values(
+		#{empno},#{depart},#{name},#{partner},#{dependent20},#{dependent60},#{disabled}
+		,#{womanpower},#{pay},#{extra}
+		)
+	</insert>
+	
+	<update id="updateRow">
+		update Salary set depart=#{depart},name=#{name},partner=#{partner},dependent20=#{dependent20},
+		dependent60=#{dependent60},disabled=#{disabled},womanpower=#{womanpower},pay=#{pay},extra=#{extra}
+		where empno = #{empno}
+	</update>
+	
+	<select id="selectAll" resultType="com.naver.dgkim1007.entities.Salary">
+		select * from Salary
+	</select>
+	
+	<select id="selectTaxYes" resultType="com.naver.dgkim1007.entities.Salary">
+		select * from Salary where yn = 'y'
+	</select>
+	
+	<update id="updateAjax">
+		update Salary set yn=#{yn}
+		where empno = #{empno}
+	</update>
+	
+	<delete id="deleteRow">
+		delete from Salary where empno=#{empno}
+	</delete>
+	
+	<delete id="deleteAjax">
+		delete from Salary where empno=#{empno}
+	</delete>
+	
+	<insert id="insertSalaryRoll">
+		insert into Salaryroll (yyyy,mm,empno,depart,name,partner, dependent20,dependent60,disabled, 
+		womanpower,pay12,incomededuction,incomeamount,personaldeduction,annuityinsurance,
+		specialdeduction,standardamount,calculatedtax,incometaxdeduction,decidedtax,
+		simpletax,finalpay
+		)values(
+		#{yyyy},#{mm},#{empno},#{depart},#{name},#{partner},#{dependent20},#{dependent60},#{disabled},
+		#{womanpower},#{pay12},#{incomededuction},#{incomeamount},#{personaldeduction},#{annuityinsurance},
+		#{specialdeduction},#{standardamount},#{calculatedtax},#{incometaxdeduction},#{decidedtax},
+		#{simpletax},#{finalpay}
+		)
+	</insert>
+	
+	<delete id="deleteSalaryRollbefore">
+		delete from Salaryroll where yyyy = #{yyyy} and mm = #{mm}
+	</delete>
+	
+	<select id="selectSalaryRollView" resultType="com.naver.dgkim1007.entities.SalaryRollViewToBean">
+		select *,sum(pay12) as mmpay,sum(annuityinsurance) as insurance,
+		sum(simpletax) as tax,sum(finalpay) as lastamount from salaryroll
+		where yyyy=#{yyyy} and mm=#{mm}
+		group by depart, name WITH ROLLUP
+	</select>
+	
+</mapper>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout">
+<body>
+<div layout:fragment="content">
+<form class="ui large form"  method="POST" action="balanceUpdateSave" data-parsley-validate="true">
+	<div class="ui grid" style="margin-top: 5px;">
+         <div class="three wide column"></div>
+         
+         <div class="ten wide column" style="font-size:11px">
+         	<div class="fluid ui" style="margin-top: 5px;color:#0275d8">
+         		<h3><i class="product hunt icon"></i> 거래실적 수정</h3>
+         	</div>
+         	
+            <div class="field fluid ui labeled input" style="margin-top: 10px">
+               <div class="ui label"> 년도 </div>
+               <input type="text" name="yyyy" style="width: 200px" th:value="${row.yyyy}" readonly="readonly">
+               <input type="hidden" name="vendcode" th:value="${row.vendcode}" readonly="readonly">
+               <div class="ui label">상호</div>
+               <input type="text" name="capacity" style="width: 200px" th:value="${row.vendname}" readonly="readonly">
+            </div>
+            
+            <div class="fluid ui labeled input">
+               <div class="ui label">구&nbsp 분</div>
+               <input type="text"  value="전월이월" readonly="readonly" style="text-align:center">
+               <input type="text"  value="거래금액" readonly="readonly" style="text-align:center">
+               <input type="text"  value="결제금액" readonly="readonly" style="text-align:center">
+               <input type="text"  value="잔액" readonly="readonly" style="text-align:center">
+            </div>
+            
+            <div class="fluid ui labeled input" style="height:35px;"> 
+               <div class="ui label"> 1 월&nbsp&nbsp</div>
+               <input type="text" name="prebalance01" th:value="${row.prebalance01}">
+               <input type="text" name="deal01" th:value="${row.deal01}">
+               <input type="text" name="pay01" th:value="${row.pay01}">
+               <input type="text" name="balance01" th:value="${row.balance01}">
+            </div>
+            
+            <div class="fluid ui labeled input">
+               <div class="ui label"> 2 월&nbsp&nbsp</div>
+               <input type="text" name="prebalance02" th:value="${row.prebalance02}">
+               <input type="text" name="deal02" th:value="${row.deal02}">
+               <input type="text" name="pay02" th:value="${row.pay02}">
+               <input type="text" name="balance02" th:value="${row.balance02}">
+            </div>
+            
+            <div class="fluid ui labeled input">
+               <div class="ui label"> 3 월&nbsp&nbsp</div>
+               <input type="text" name="prebalance03" th:value="${row.prebalance03}">
+               <input type="text" name="deal03" th:value="${row.deal03}">
+               <input type="text" name="pay03" th:value="${row.pay03}">
+               <input type="text" name="balance03" th:value="${row.balance03}">
+            </div>
+            
+            <div class="fluid ui labeled input">
+               <div class="ui label"> 4 월&nbsp&nbsp</div>
+               <input type="text" name="prebalance04" th:value="${row.prebalance04}">
+               <input type="text" name="deal04" th:value="${row.deal04}">
+               <input type="text" name="pay04" th:value="${row.pay04}">
+               <input type="text" name="balance04" th:value="${row.balance04}">
+            </div>
+            
+            <div class="fluid ui labeled input">
+               <div class="ui label"> 5 월&nbsp&nbsp</div>
+               <input type="text" name="prebalance05" th:value="${row.prebalance05}">
+               <input type="text" name="deal05" th:value="${row.deal05}">
+               <input type="text" name="pay05" th:value="${row.pay05}">
+               <input type="text" name="balance05" th:value="${row.balance05}">
+            </div>
+            
+            <div class="fluid ui labeled input">
+               <div class="ui label"> 6 월&nbsp&nbsp</div>
+               <input type="text" name="prebalance06" th:value="${row.prebalance06}">
+               <input type="text" name="deal06" th:value="${row.deal06}">
+               <input type="text" name="pay06" th:value="${row.pay06}">
+               <input type="text" name="balance06" th:value="${row.balance06}">
+            </div>
+            
+            <div class="fluid ui labeled input">
+               <div class="ui label"> 7 월&nbsp&nbsp</div>
+               <input type="text" name="prebalance07" th:value="${row.prebalance07}">
+               <input type="text" name="deal07" th:value="${row.deal07}">
+               <input type="text" name="pay07" th:value="${row.pay07}">
+               <input type="text" name="balance07" th:value="${row.balance07}">
+            </div>
+            
+            <div class="fluid ui labeled input">
+               <div class="ui label"> 8 월&nbsp&nbsp</div>
+               <input type="text" name="prebalance08" th:value="${row.prebalance08}">
+               <input type="text" name="deal08" th:value="${row.deal08}">
+               <input type="text" name="pay08" th:value="${row.pay08}">
+               <input type="text" name="balance08" th:value="${row.balance08}">
+            </div>
+            
+            <div class="fluid ui labeled input">
+               <div class="ui label"> 9 월&nbsp&nbsp</div>
+               <input type="text" name="prebalance09" th:value="${row.prebalance09}">
+               <input type="text" name="deal09" th:value="${row.deal09}">
+               <input type="text" name="pay09" th:value="${row.pay09}">
+               <input type="text" name="balance09" th:value="${row.balance09}">
+            </div>
+            
+            <div class="fluid ui labeled input">
+               <div class="ui label"> 10월</div>
+               <input type="text" name="prebalance10" th:value="${row.prebalance10}">
+               <input type="text" name="deal10" th:value="${row.deal10}">
+               <input type="text" name="pay10" th:value="${row.pay10}">
+               <input type="text" name="balance10" th:value="${row.balance10}">
+            </div>
+            
+            <div class="fluid ui labeled input">
+               <div class="ui label"> 11월</div>
+               <input type="text" name="prebalance11" th:value="${row.prebalance11}">
+               <input type="text" name="deal11" th:value="${row.deal11}">
+               <input type="text" name="pay11" th:value="${row.pay11}">
+               <input type="text" name="balance11" th:value="${row.balance11}">
+            </div>
+            
+            <div class="fluid ui labeled input">
+               <div class="ui label"> 12월</div>
+               <input type="text" name="prebalance12" th:value="${row.prebalance12}">
+               <input type="text" name="deal12" th:value="${row.deal12}">
+               <input type="text" name="pay12" th:value="${row.pay12}">
+               <input type="text" name="balance12" th:value="${row.balance12}">
+            </div>
+            
+            <div class="field fluid ui labeled input" style="margin-top: 10px">
+            	<div class="ui label">전년이월</div>
+	               <input type="text" name="preyybalance" th:value="${row.preyybalance}">	
+	               <div class="ui label">현재잔액</div>
+	               <input type="text" name="balance" th:value="${row.balance}">
+            </div>
+            
+            <div class="fluid ui grid input" style="margin-top:30px;">
+	        	<div style="width:50%">
+	        		<button class="fluid ui primary basic button" type="submit">
+		            	<h3>저 장</h3>
+		          	</button>
+	        	</div>
+	        	<div style="width:50%">
+	        		<button class="fluid ui negative basic button" type="button" onclick="location.href='index'">
+		            	<h3>Cancel</h3>
+		          	</button>
+	        	</div>
+        	</div>
+            
+		</div>
+		<div class="three wide column"></div>
+	</div>
+</form>		
+</div>
+</body>
+</html>
+

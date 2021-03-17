@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout">
+<body>
+<div layout:fragment="content">
+<form class="ui large form"  method="POST" action="venderInsertSave"
+            data-parsley-validate="true">
+	<div class="ui grid" style="margin-top: 5px;">
+         <div class="four wide column"></div>
+         <div class="eight wide column">
+         	<div class="field fluid ui" style="margin-top: 10px;color:#0275d8">
+         		<h3><i class="product hunt icon"></i> 거래처 등록</h3>
+         	</div>
+         	
+            <div class="field fluid ui labeled input">
+               <div class="ui label">코드</div>
+               <input type="text" name="code" id="code" size="4" placeholder="거래처코드" required>
+               <button type="button" class="ui red basic button codeconfirm"
+                  style="margin-left: 5px;">
+                  <i class="check icon"></i>중복 확인
+               </button>
+            </div>
+            
+            <div class="field fluid ui labeled input">
+               <div class="ui label"> 상호 </div>
+               <input type="text" name="name" style="width: 200px" placeholder="상호" required>
+               <div class="ui label">대표자</div>
+               <input type="text" name="ceoname" style="width: 200px" placeholder="대표자" >
+            </div>
+            
+            <div class="field fluid ui labeled input">
+            	<div class="ui label">사업자번호</div>
+            	<input type="text" name="busno1">
+                <input type="text" name="busno2">
+               	<input type="text" name="busno3">
+            </div>
+            
+            <div class="field fluid ui labeled input">
+               <div class="ui label" style="width: 100px">우편번호</div>
+               <input type="text" name="zipcode"  id="zipcode"  placeholder="우편번호" required>
+               <button type="button" class="ui primary button postfind"
+               		onclick="zipcodeFind()"
+                  style="margin-left: 5px;">
+                  <i class="check icon"></i>주소찾기
+               </button>
+            </div>
+            
+            <div class="field fluid ui labeled input">
+               <div class="ui label">주소</div>
+               <input type="text" name="newaddr" id="addr1">
+            </div>
+            
+            <div class="field fluid ui labeled input">
+               <div class="ui label">상세주소</div>
+               <input type="text" name="detailaddr" id="addr2">
+            </div>
+            
+            <div class="field fluid ui labeled input">
+            	<div class="ui label">전화번호</div>
+            	<input type="text" name="officeno1">
+                <input type="text" name="officeno2">
+               	<input type="text" name="officeno3">
+            </div>
+            
+            <div class="field" style="margin-top:20px">
+				<span><button type="submit" class="ui primary basic button" style="width:48%">저장</button></span>
+				<span><button type="button" class="ui negative  basic button" onclick="location.href='index'" style="width:48%">취소</button></span>
+			</div>
+            
+         </div>
+         <div class="four wide column"></div>
+      </div>
+</form>		
+</div>
+</body>
+</html>
+

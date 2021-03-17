@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.naver.dgkim1007.dao.VenderDao">
+
+	<select id="selectOne" resultType="com.naver.dgkim1007.entities.Vender">
+		select * from vender where code=#{code}
+	</select>
+
+	<insert id="insertRow">
+		insert into Vender(code,name,busno1,busno2,busno3,ceoname,
+		zipcode,newaddr,oldaddr,detailaddr,officeno1,officeno2,officeno3
+		)values(
+		#{code,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{busno1,jdbcType=VARCHAR},#{busno2,jdbcType=VARCHAR},
+		#{busno3,jdbcType=VARCHAR},#{ceoname,jdbcType=VARCHAR},#{zipcode,jdbcType=VARCHAR},#{newaddr,jdbcType=VARCHAR},
+		#{oldaddr,jdbcType=VARCHAR},#{detailaddr,jdbcType=VARCHAR},#{officeno1,jdbcType=VARCHAR},#{officeno2,jdbcType=VARCHAR},#{officeno3,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<update id="updateRow">
+		update Vender set name=#{name},busno1=#{busno1},busno2=#{busno2},
+		busno3=#{busno3},ceoname=#{ceoname},zipcode=#{zipcode},
+		newaddr=#{newaddr},detailaddr=#{detailaddr},officeno1=#{officeno1},
+		officeno2=#{officeno2},officeno3=#{officeno3}
+		where code=#{code}
+	</update>
+	
+	<select id="selectAll" resultType="com.naver.dgkim1007.entities.Vender">
+		select * from vender
+	</select>
+	
+	<update id="updateAjax">
+		update vender set stock=#{stock} 
+		where code = #{code}
+	</update>
+	
+	<delete id="deleteAjax">
+		delete from vender where code=#{code}
+	</delete>
+	
+</mapper>

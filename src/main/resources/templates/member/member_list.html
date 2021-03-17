@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout">
+<body>
+<div layout:fragment="content">
+<form class="ui large form" method="POST">
+	<div class="ui grid center aligned">
+		<div class="two wide column">
+		</div>
+		
+		<div class="fluid twelve wide column">
+			<table id="memberexample" class="display nowrap" style="width:100%  !important;">
+				<thead>
+					<tr style="text-align:center">
+						<th>image</th>
+						<th>email</th>
+						<th>name</th>
+						<th>phone</th>
+						<th>level</th>
+						<th>Option</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="member : ${members}" style="cursor: pointer;">
+				   		<td><img th:src="${member.photo}" class="nicknameprofile" ></td>    
+						<td th:text="${member.email}"></td>
+						<td th:text="${member.name}"></td>
+						<td th:text="${member.phone}"></td>
+						<td><input type="text" style="width:10px" maxlength="1" th:value="${member.memlevel}"></td>
+						<td>
+							<i class="edit outline icon primary" title="update" id="editbtn"></i>
+							<i class="trash alternate outline icon red" title="delete" id="deletebtn"></i>
+						</td>
+					</tr>
+		        </tbody>
+			</table>
+		</div>
+		<div class="ui mini modal delete">
+				<div class="header"  style="text-align:center">정보 삭제</div>
+				<div class="image content">
+					<img class="image">
+					<div class="description">
+						<p  style="text-align:center">삭제 하시겠습니까?</p>
+					</div>
+				</div>
+				<div class="center" style="text-align:center">
+					<button type="button" class="modaldelete">삭제</button>
+					<button type="button" class="modalcancel">취소</button>
+					<p><p>
+				</div>
+				
+			</div>
+		
+		<div class="two wide column">
+		</div>
+	</div>
+</form>		
+</div>
+</body>
+</html>
+

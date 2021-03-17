@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${session.lang}" 
+xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+
+<head th:replace="fragments/header :: header">
+    <meta charset="UTF-8" />
+</head>
+<body>
+<div class="ui grid">
+  <div class="sixteen column row ui grid middle aligned center aligned" style="background-color:#3F7288;margin-top:10px">
+    <div class="column"></div>
+    <div class="column"><a href="#"><i class="home icon" onclick="location.href='/index'"  style="color:#ffffff"></i></a></div>
+    <div class="column"></div>
+    <div class="column"></div>
+    <div class="column"></div>
+    <div class="column"></div>
+    <div class="column"></div>
+    <div class="column"></div>
+    <div class="column"></div>
+    <div class="column"></div>
+    <div class="column"><span th:text="${session.lang}"></span></div>
+    <div class="column">
+    	<span th:if="${session.sessionemail != null}"><a href="boardPageList" style="color:#ffffff;font-size:8px">게시판</a></span>
+    </div>
+    <div class="two wide column">
+    
+    	<div class="ui compact menu" style="background-color:#3F7288;border:none">
+			<div th:if="${session.sessionemail==null}">
+				<a href="login" style="color:#ffffff">Login</a>
+			</div>
+			
+			<div th:unless="${session.sessionemail==null}">
+           		<div class="ui simple dropdown item">
+             		<img class="nicknameprofile" th:src="${session.sessionphoto}">
+	             	<i class="dropdown icon"></i>
+	             	<div class="menu">
+		                 <a class="item" href="memberUpdate">정보수정</a> 
+		                 <a class="item" href="logout">Logout</a>
+		                 <a class="item" th:if="${session.sessionlevel == 1}" href="memberList" style="color:#ffffff">회원관리</a>
+	             	</div>
+             	</div>
+			</div>
+			
+         </div>
+         
+    </div>
+    <div class="column"> 
+    
+    	<div class="ui floating dropdown labeled search icon button">
+	  		<i class="world icon"></i>
+	 		<span class="text">Lang</span>
+	  		<div class="menu lang">
+			    <div class="item lang"  data-value="kr">Korea</div>
+			    <div class="item lang"  data-value="en">usa</div>
+			    <div class="item lang"  data-value="cn">china</div>
+		    </div>
+    	</div>
+    
+    </div>
+    <div class="column">&nbsp</div>
+  </div>
+</div>
+
+<div class="ui two column grid center aligned">
+	<div class="one wide column" style="background-color:#3F7288;">
+		<div>
+			<span th:if="${session.sessionlevel lt 4 && session.sessionlevel != null}">
+				<a href="salaryInsert" style="color:#ffffff;font-size:8px">급여등록</a>
+			</span>
+			
+		</div>
+		<div>
+			<span th:if="${session.sessionlevel lt 4 && session.sessionlevel != null}">
+				<a href="salaryList" style="color:#ffffff;font-size:8px">급여List</a>
+			</span>
+		</div>
+		<div>
+			<span th:if="${session.sessionlevel lt 4 && session.sessionlevel != null}">
+				<a href="salaryTax" style="color:#ffffff;font-size:8px">급여 계산</a>
+			</span>
+		</div>
+		<div>&nbsp</div>
+		<div>
+			<span th:if="${session.sessionlevel lt 4 && session.sessionlevel != null}">
+				<a href="salaryRollChoice" style="color:#ffffff;font-size:8px">SalaryRoll</a>
+			</span>
+		</div>
+		<div>&nbsp</div>
+		<div>
+			<span th:if="${session.sessionlevel lt 4 && session.sessionlevel != null}">
+				<a href="productInsert" style="color:#ffffff;font-size:8px">상품 등록</a>
+			</span>
+		</div>
+		<div>
+			<span th:if="${session.sessionlevel lt 4 && session.sessionlevel != null}">
+				<a href="productList" style="color:#ffffff;font-size:8px">상품 검색</a>
+			</span>
+		</div>
+		<div>&nbsp</div>
+		<div>
+			<span th:if="${session.sessionlevel lt 4 && session.sessionlevel != null}">
+				<a href="venderInsert" style="color:#ffffff;font-size:8px">거래처 등록</a>
+			</span>
+		</div>
+		<div>
+			<span th:if="${session.sessionlevel lt 4 && session.sessionlevel != null}">
+				<a href="venderList" style="color:#ffffff;font-size:8px">거래처 검색</a>
+			</span>
+		</div>
+		<div>
+			<span th:if="${session.sessionlevel lt 4 && session.sessionlevel != null}">
+				<a href="balanceSelectyy" style="color:#ffffff;font-size:8px">거래처 실적</a>
+			</span>
+		</div>
+		<div>
+			<span th:if="${session.sessionlevel lt 4 && session.sessionlevel != null}">
+				<a href="buyInsert" style="color:#ffffff;font-size:8px">매입</a>
+			</span>
+		</div>
+		<div>
+			<span th:if="${session.sessionlevel lt 4 && session.sessionlevel != null}">
+				<a href="finalDistribution" style="color:#ffffff;font-size:8px">마감 관리</a>
+			</span>
+		</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+		<div>&nbsp</div>
+	</div>
+	<div class="fifteen wide column">
+		<div layout:fragment="content"></div>
+	</div>
+</div>
+
+<!-- <div class="column row center aligned"> -->
+<!-- 	<footer th:replace="fragments/footer :: footerFragment"></footer> -->
+<!-- </div> -->
+</body>
+</html>

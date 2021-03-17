@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout">
+<body>
+<div layout:fragment="content">
+<form class="ui large form" method="POST" name="findListformname" action="findListBoard"
+            data-parsley-validate="true">
+	<div class="ui grid center aligned">
+		<div class="ten wide column">
+			<div class="field center aligned" style="margin-top:30px">
+				<h3> <i class="edit outline icon"></i> 게시판 </h3>
+			</div>
+			<div class="fluid" style="text-align:right">
+				<span style="text-align:right;color:red;cursor:pointer">
+					<i class="pencil alternate icon" onclick="location.href='boardWrite'" title="글쓰기"></i>
+				</span>
+			</div>
+			<div class="fluid" style="margin-top:10px">
+				<table class="ui celled table">
+					<thead>
+						<tr style="text-align:center">
+							<th>글번호</th>
+							<th>E-mail</th>
+							<th>작성자</th>
+							<th>제목</th>
+							<th>첨부파일</th>
+							<th>조회수</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="board : ${boards}">
+							<td th:text="${board.b_seq}" style="text-align:center"></td>
+							<td th:text="${board.b_email}"></td>
+							<td th:text="${board.b_name}"></td>
+							<td>
+								<span th:if="${board.b_step gt 0}">
+							    	<img src="/images/reply.png" width="20px" height="25px">
+							    </span>
+								<a th:href="@{boardDetail(b_seq=${board.b_seq})}"><span th:text="${board.b_title}"></span></a>
+							</td>
+							
+							<td style="padding:10px;text-align:center">
+								<span th:if="${board.b_attach != null}">
+									<a th:href="@{fileDownload(b_attach=${board.b_attach})}"><i class="paperclip icon"></i></a>
+								</span>
+							</td>
+							<td th:text="${board.b_hit}"  style="text-align:center"></td>
+						</tr>
+					</tbody>
+				</table>
+				<div>
+					<div class="ui icon input">
+					  <input type="text" name="find" placeholder="Search..." th:value="${find}" >
+					  <a  href="#" onclick="findListformname.submit();"><i class="search icon" style="padding:10px"></i></a>
+					</div>
+				</div>
+				<div  th:each="page : ${pages}" style="display:inline-block">
+					[ <a th:href="@{boardPageSelect(page=${page})}"><span th:text="${page}"></span></a> ] 
+				</div>
+			</div>
+		</div>
+	</div>
+</form>		
+</div>
+</body>
+</html>
+

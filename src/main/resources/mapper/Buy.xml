@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.naver.dgkim1007.dao.BuyDao">
+
+	<select id="selectOne" resultType="com.naver.dgkim1007.entities.Buy">
+		select * from buy where seq=#{seq}
+	</select>
+
+	<insert id="insertRow">
+		insert into Buy(seq,vendcode,vendname,yyyy,mm,dd,no,
+		hang,procode,proname,price,qty,total,memo
+		)values(
+		(SELECT ifnull(MAX(seq)+1,1 ) FROM buy buy_alias),
+		#{vendcode},#{vendname},#{yyyy},#{mm},#{dd},#{no},
+		#{hang},#{procode},#{proname},#{price},#{qty},#{total},#{memo}
+		)
+	</insert>
+	
+	<insert id="buyBalanceAdd">
+		insert into balance(yyyy,vendcode,vendname,${dealname},${balancename},balance,dealtot
+		)values(
+		#{yyyy},#{vendcode},#{vendname},#{price}*#{qty},#{price}*#{qty},#{price}*#{qty},#{price}*#{qty}
+		)
+		ON DUPLICATE KEY UPDATE
+		${dealname}=${dealname} + #{price}*#{qty},
+		${balancename}=${balancename} + #{price}*#{qty},
+		balance = balance + #{price}*#{qty},dealtot = dealtot + #{price}*#{qty}
+	</insert>
+	
+	<update id="buyBalanceSub">
+		update balance set
+		${dealname}=${dealname} - #{beforeprice}*#{beforeqty},
+		${balancename}=${balancename} -  #{beforeprice}*#{beforeqty},
+		balance = balance -  #{beforeprice}*#{beforeqty},
+		dealtot = dealtot -  #{beforeprice}*#{beforeqty} 
+		where yyyy = #{yyyy} and vendcode=#{vendcode}
+	</update>
+	
+	<update id="buyBalanceAjaxAdd">
+		update balance set
+		${dealname}=${dealname} + #{price}*#{qty},
+		${balancename}=${balancename} + #{price}*#{qty},
+		balance = balance + #{price}*#{qty},
+		dealtot = dealtot + #{price}*#{qty}
+		where yyyy = #{yyyy} and vendcode=#{vendcode}
+	</update>
+	
+	<update id="updateRow">
+		update Buy set procode=#{procode},proname=#{proname},price=#{price},
+		qty=#{qty},total=#{total},memo=#{memo}
+		where seq=#{seq}
+	</update>
+	
+	<select id="selectBuyRollup" resultType="com.naver.dgkim1007.entities.Buy">
+		select seq,vendcode,yyyy,mm,dd,no,hang,B.name vendname,procode,
+		C.name proname,price,sum(qty) qty,sum(price*qty) total,memo
+		from buy A, vender B, product C 
+		where vendcode=#{vendcode} and yyyy=#{yyyy} and mm=#{mm} and dd=#{dd} 
+		and A.vendcode=B.code and A.procode=C.code
+		group by no,hang WITH ROLLUP
+	</select>
+	
+	<select id="selectBuyFindRollup" resultType="com.naver.dgkim1007.entities.Buy">
+		select seq,vendcode,yyyy,mm,dd,no,hang,proname,procode,
+		proname,price,sum(qty) qty,sum(price*qty) total,memo
+		from buy 
+		where vendcode=#{vendcodefind} and yyyy=#{yyyyfind} and mm=#{mmfind} and dd=#{ddfind} 
+		group by no,hang WITH ROLLUP
+	</select>
+	
+	<delete id="deleteAjax">
+		delete from buy where seq=#{seq}
+	</delete>
+	
+	<select id="getMaxNo" resultType="Integer">
+		SELECT ifnull(MAX(no)+1,1 ) from buy buy_alias
+		where vendcode=#{vendcode} and yyyy=#{yyyy} and mm=#{mm} and dd=#{dd} 
+	</select>
+	
+	<select id="getMaxHang" resultType="Integer">
+		SELECT ifnull(MAX(hang)+1,1 ) from buy buy_alias
+		where vendcode=#{vendcode} and yyyy=#{yyyy} and mm=#{mm} and dd=#{dd} and no=#{no} 
+	</select>
+</mapper>

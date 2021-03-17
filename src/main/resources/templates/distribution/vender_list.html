@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout">
+<body>
+<div layout:fragment="content">
+<form class="ui large form" method="POST">
+	<div class="ui grid center aligned">
+		<div class="two wide column">
+		</div>
+		
+		<div class="fluid twelve wide column">
+			<table id="venderexample" class="display nowrap" style="width:100%  !important;">
+				<thead>
+					<tr style="text-align:center">
+						<th>code</th>
+						<th>상호</th>
+						<th>사업자번호</th>
+						<th>대표자</th>
+						<th>우편번호</th>
+						<th>주소</th>
+						<th>전화번호</th>
+						<th>Option</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="vender : ${venders}">
+						<td th:text="${vender.code}"></td>
+						<td th:text="${vender.name}" th:onclick="'location.href=\''+@{venderUpdate(code=${vender.code})}+'\';'" style="cursor:pointer"></td>
+						<td>
+							<span th:text="${vender.busno1}"></span>-<span th:text="${vender.busno2}"></span>-<span th:text="${vender.busno3}"></span>
+						</td>
+						<td th:text="${vender.ceoname}"></td>
+						<td th:text="${vender.zipcode}"></td>
+						<td>
+							<span th:text="${vender.newaddr}"></span> <span th:text="${vender.detailaddr}"></span>
+						</td>
+						<td>
+							<span th:text="${vender.officeno1}"></span>-<span th:text="${vender.officeno2}"></span>-<span th:text="${vender.officeno3}"></span>
+						</td>
+						<td>
+							<i class="trash alternate outline icon red" title="delete" id="venderlistdeletebtn"></i>
+						</td>
+					</tr>
+		        </tbody>
+			</table>
+		</div>
+		<div class="ui mini modal venderdelete">
+				<div class="header"  style="text-align:center">정보 삭제</div>
+				<div class="image content">
+					<img class="image">
+					<div class="description">
+						<p  style="text-align:center">삭제 하시겠습니까?</p>
+					</div>
+				</div>
+				<div class="center" style="text-align:center">
+					<button type="button" id="vendermodaldelete">삭제</button>
+					<button type="button" id="vendermodalcancel">취소</button>
+					<p><p>
+				</div>
+				
+			</div>
+		
+		<div class="two wide column">
+		</div>
+	</div>
+</form>		
+</div>
+</body>
+</html>
+

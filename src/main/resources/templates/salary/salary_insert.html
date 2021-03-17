@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout">
+<body>
+<div layout:fragment="content">
+<form class="ui large form" id="salaryinsertform" method="POST" action="salary_insertSave"
+            data-parsley-validate="true">
+	<div class="ui grid center aligned">
+		<div class="four wide column">
+		</div>
+		<div class="fluid seven wide column">
+		
+			<div class="field center aligned" style="margin-top:30px">
+				<h3> 급여등록 </h3>
+			</div>
+		
+			<div class="field">
+				<div class="fluid ui left icon input">
+					<i class="mail icon"></i>
+					<input type="hidden" id="enpnoconfirm" name="empnoconfirm" value="n">
+					<input type="text" id="empno" name="empno" placeholder="사원번호"  required>
+					<button type="button" class="ui teal right button empnoconfirm">
+							중복검사</button>
+				</div>
+			</div>
+		
+			<div class="field" >
+				<div class="ui labeled input  center aligned" style="width:49%">
+			  		<div class="ui label">
+				    	 부 서
+				  	</div>
+				  	<select class="ui search  dropdown" name="depart" style='width:20px !important' >
+	  					<option value="">부서</option>
+	  					<option value="기획부">기획부</option>
+	  					<option value="생산부">생산부</option>
+	  					<option value="영업부">영업부</option>
+	  					<option value="총무부">총무부</option>
+	  				</select>
+				</div>	
+				
+				<div class="ui labeled input  center aligned"  style="width:49%">
+	  				<div class="ui label">
+				    	이 름
+				  	</div>
+				  	<input type="text" name="name" class="meminsertfocus"
+						maxlength="255" required placeholder="이름" onclick="confirm_empno();">
+				</div>
+			</div>
+			
+			<div class="field" >
+				<div class="ui labeled input  center aligned" style="width:49%">
+			  		<div class="ui label">
+				    	 배우자
+				  	</div>
+				  	<select class="ui search  dropdown" name="partner" style='width:20px !important' >
+	  					<option value="0">0</option>
+	  					<option value="1">1</option>
+	  				</select>
+				</div>	
+				
+				<div class="ui labeled input  center aligned"  style="width:49%">
+	  				<div class="ui label">
+				    	부양20
+				  	</div>
+				  	<select class="ui search dropdown" name="dependent20">
+	  					<option value="0">0</option>
+	  					<option value="1">1</option>
+	  					<option value="2">2</option>
+	  					<option value="3">3</option>
+	  					<option value="4">4</option>
+	  					<option value="4">5</option>
+	  					<option value="4">6</option>
+	  				</select>
+				</div>
+			</div>
+			
+			<div class="field" >
+				<div class="ui labeled input  center aligned" style="width:49%">
+			  		<div class="ui label">
+				    	 부양60
+				  	</div>
+				  	<select class="ui search  dropdown" name="dependent60" style='width:20px !important' >
+	  					<option value="0">0</option>
+	  					<option value="1">1</option>
+	  					<option value="2">2</option>
+	  					<option value="3">3</option>
+	  					<option value="3">4</option>
+	  				</select>
+				</div>	
+				
+				<div class="ui labeled input  center aligned"  style="width:49%">
+	  				<div class="ui label">
+				    	장애인
+				  	</div>
+				  	<select class="ui search dropdown" name="disabled">
+	  					<option value="0">0</option>
+	  					<option value="1">1</option>
+	  					<option value="2">2</option>
+	  				</select>
+				</div>
+			</div>
+			
+			<div class="field">
+				<div class="ui labeled input"  style="width:100%">
+	  				<div class="ui label" style="font-size:14px;padding:10px">
+				    	부녀가장
+				  	</div>
+				  	<select class="ui search dropdown" name="womanpower">
+	  					<option value="0">0</option>
+	  					<option value="1">1</option>
+	  				</select>
+				</div>
+			</div>
+			
+			<div class="field" >
+				<div class="ui labeled input  center aligned" style="width:49%">
+			  		<div class="ui label">
+				    	 월급여
+				  	</div>
+				  	<input type="text" name="pay">
+				</div>	
+				
+				<div class="ui labeled input  center aligned"  style="width:49%">
+	  				<div class="ui label">
+				    	수 당
+				  	</div>
+				  	<input type="text" name="extra">
+				</div>
+			</div>
+			
+			<div class="field" style="margin-top:20px">
+				<span><button type="submit" id="membersavebtn" class="ui primary basic button" style="width:48%">저장</button></span>
+				<span><button type="button" class="ui negative  basic button" onclick="location.href='index'" style="width:48%">취소</button></span>
+			</div>
+			
+		</div>
+		<div class="four wide column">
+		</div>
+		
+		<div class="ui mini modal">
+			<div class="header">사원번호 중복검사</div>
+			<div class="image content">
+				<img class="image">
+				<div class="description">
+					<p></p>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</form>		
+</div>
+</body>
+</html>
+

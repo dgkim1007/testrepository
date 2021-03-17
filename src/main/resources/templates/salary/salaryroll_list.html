@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout">
+<body>
+<div layout:fragment="content">
+<form class="ui large form" method="POST">
+	<div class="ui grid center aligned">
+		<div class="fluid fifteen wide column" style="font-size:8px">
+			<table id="salaryrollexample" class="display nowrap" style="width:100%  !important;">
+				<thead>
+					<tr style="text-align:center">
+						<th>yyyy</th>
+						<th>mm</th>
+						<th>사원번호</th>
+						<th>부서</th>
+						<th>이름</th>
+						<th>배우자공제</th>
+						<th>부양자20</th>
+						<th>부양자60</th>
+						<th>장애인</th>
+						<th>월급여</th>
+						<th>국민연금</th>
+						<th>갑근세</th>
+						<th>수령액</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="salaryroll : ${salaryrolls}">
+					
+						<td th:if ="${salaryroll.name == null}" th:text=" 계"></td>
+                        <td th:unless ="${salaryroll.name == null}" th:text="${salaryroll.yyyy}"></td>
+                        <td th:if ="${salaryroll.name == null}" th:text="''"></td>
+                        <td th:unless ="${salaryroll.name == null}" th:text="${salaryroll.mm}"></td>
+						<td th:if ="${salaryroll.name == null}" th:text="''"></td>
+                        <td th:unless ="${salaryroll.name == null}" th:text="${salaryroll.empno}"></td>
+						<td th:text="${salaryroll.depart}"></td>
+						<td th:text="${salaryroll.name}"></td>
+						<td th:if ="${salaryroll.name == null}" th:text="''"></td>
+                        <td th:unless ="${salaryroll.name == null}" th:text="${salaryroll.partner}"></td>
+						<td th:if ="${salaryroll.name == null}" th:text="''"></td>
+                        <td th:unless ="${salaryroll.name == null}" th:text="${salaryroll.dependent20}"></td>
+						<td th:if ="${salaryroll.name == null}" th:text="''"></td>
+                        <td th:unless ="${salaryroll.name == null}" th:text="${salaryroll.dependent60}"></td>
+						<td th:if ="${salaryroll.name == null}" th:text="''"></td>
+                        <td th:unless ="${salaryroll.name == null}" th:text="${salaryroll.disabled}"></td>
+						<td th:text="${salaryroll.mmpay}"></td>
+						<td th:text="${salaryroll.insurance}"></td>
+						<td th:text="${salaryroll.tax}"></td>
+						<td th:text="${salaryroll.lastamount}"></td>
+					</tr>
+		        </tbody>
+			</table>
+			
+			<div class="ui mini modal salarydelete">
+				<div class="header"  style="text-align:center">정보 삭제</div>
+				<div class="image content">
+					<img class="image">
+					<div class="description">
+						<p  style="text-align:center">삭제 하시겠습니까?</p>
+					</div>
+				</div>
+				<div class="center" style="text-align:center">
+					<button type="button" id="salarydeleteok">삭제</button>
+					<button type="button" id="salarydeletecancel">취소</button>
+					<p><p>
+				</div>
+				
+			</div>
+			
+		</div>
+	</div>
+</form>		
+</div>
+</body>
+</html>
+

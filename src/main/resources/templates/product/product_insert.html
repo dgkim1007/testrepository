@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout">
+<body>
+<div layout:fragment="content">
+<form class="ui large form" id="memberinsertform" method="POST" action="product_insertSave"
+            data-parsley-validate="true">
+	<div class="ui grid" style="margin-top: 5px;font-size:10px">
+         <div class="four wide column"></div>
+         <div class="eight wide column">
+         	<div class="fluid ui" style="margin-top: 10px;color:#0275d8">
+         		<h3><i class="product hunt icon"></i> 상품 등록</h3>
+         	</div>
+         	
+            <div class="fluid ui labeled input" style="margin-top: 10px">
+               <div class="ui label" style="width: 100px">상품코드</div>
+               <input type="text" name="code" id="code"  placeholder="상품코드" required>
+               <button type="button" class="ui red basic button codeconfirm"
+                  style="margin-left: 5px;">
+                  <i class="check icon"></i>중복 확인
+               </button>
+            </div>
+            
+            <div class="fluid ui labeled input" style="margin-top: 10px">
+               <div class="ui label"> 상품명 </div>
+               <input type="text" name="name" style="width: 200px" placeholder="이름" required>
+               <div class="ui label">상품규격</div>
+               <input type="text" name="capacity" style="width: 200px" placeholder="이름" >
+            </div>
+            
+            <div class="fluid ui labeled input" style="margin-top: 10px">
+               <div class="ui label">상품설명</div>
+               <input type="text" name="explanation" placeholder="이름">
+            </div>
+            
+            <div class="fluid ui labeled input" style="margin-top: 10px">
+               <div class="ui label" >매입단가</div>
+               <input type="text" name="buyprice" style="width: 200px" th:value="0">
+               <div class="ui label">매출단가</div>
+               <input type="text" name="saleprice" style="width: 200px" th:value="0">
+            </div>
+            
+            <div class=" fluid ui labeled input" style="margin-top: 10px">
+               <div class="ui label">전년재고</div>
+                <input type="text" name="preyystock" th:value="0">
+               <div class="ui label">전월재고</div>
+                <input type="text" name="premmstock" th:value="0">
+               <div class="ui label">전일재고</div>
+               <input type="text" name="preddstock" th:value="0">
+            </div>
+            <div class="fluid ui labeled input" style="background-color:#0275d8;height:3px;margin-top:10px">
+            </div>
+            <div class="fluid ui labeled input" style="margin-top: 10px">
+               <div class="ui label">1월매입</div>
+               <input type="text" name="buy01" th:value="0">
+               <div class="ui label">1월매출</div>
+               <input type="text" name="sale01" th:value="0">
+               <div class="ui label">7월매입</div>
+               <input type="text" name="buy07" th:value="0">
+               <div class="ui label">7월매출</div>
+               <input type="text" name="sale07" th:value="0">
+            </div>
+            
+            <div class="fluid ui labeled input" style="margin-top: 10px">
+               <div class="ui label">2월매입</div>
+               <input type="text" name="buy02" th:value="0">
+               <div class="ui label">2월매출</div>
+               <input type="text" name="sale02" th:value="0">
+               <div class="ui label">8월매입</div>
+               <input type="text" name="buy08" th:value="0">
+               <div class="ui label">8월매출</div>
+               <input type="text" name="sale08" th:value="0">
+            </div>
+            
+            <div class="fluid ui labeled input" style="margin-top: 10px">
+               <div class="ui label">3월매입</div>
+               <input type="text" name="buy03" th:value="0">
+               <div class="ui label">3월매출</div>
+               <input type="text" name="sale03" th:value="0">
+               <div class="ui label">9월매입</div>
+               <input type="text" name="buy09" th:value="0">
+               <div class="ui label">9월매출</div>
+               <input type="text" name="sale09" th:value="0">
+            </div>
+            
+            <div class="fluid ui labeled input" style="margin-top: 10px">
+               <div class="ui label">4월매입</div>
+               <input type="text" name="buy04" th:value="0">
+               <div class="ui label">4월매출</div>
+               <input type="text" name="sale04" th:value="0">
+               <div class="ui label">10월매입</div>
+               <input type="text" name="buy10" th:value="0">
+               <div class="ui label">10월매출</div>
+               <input type="text" name="sale10" th:value="0">
+            </div> 
+            
+            <div class="fluid ui labeled input" style="margin-top: 10px">
+               <div class="ui label">5월매입</div>
+               <input type="text" name="buy05" th:value="0">
+               <div class="ui label">5월매출</div>
+               <input type="text" name="sale05" th:value="0">
+               <div class="ui label">11월매입</div>
+               <input type="text" name="buy11" th:value="0">
+               <div class="ui label">11월매출</div>
+               <input type="text" name="sale11" th:value="0">
+            </div>
+            
+            <div class="fluid ui labeled input" style="margin-top: 10px">
+               <div class="ui label">6월매입</div>
+               <input type="text" name="buy06" th:value="0">
+               <div class="ui label">6월매출</div>
+               <input type="text" name="sale06" th:value="0">
+               <div class="ui label">12월매입</div>
+               <input type="text" name="buy12" th:value="0">
+               <div class="ui label">12월매출</div>
+               <input type="text" name="sale12" th:value="0">
+            </div>
+            
+            <div class="fluid ui labeled input" style="background-color:#0275d8;height:3px;margin-top:10px">
+            </div>
+            
+            <div class="fluid ui labeled input" style="margin-top: 10px">
+               <div class="ui label">현재재고</div>
+               <input type="text" name="stock" th:value="0">
+            </div>
+            <div class="field" style="margin-top:20px">
+				<span><button type="submit" class="ui primary basic button" style="width:48%">저장</button></span>
+				<span><button type="button" class="ui negative  basic button" onclick="location.href='index'" style="width:48%">취소</button></span>
+			</div>
+            
+         </div>
+         <div class="four wide column"></div>
+      </div>
+</form>		
+</div>
+</body>
+</html>
+

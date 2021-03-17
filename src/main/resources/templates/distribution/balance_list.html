@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout">
+<body>
+	<div layout:fragment="content">
+		<form class="ui large form" method="POST">
+			<div class="fluid ui grid center aligned">
+				<div class="two wide column"></div>
+
+				<div class="fluid twelve wide column">
+					<table id="balanceexample" class="display nowrap"
+						style="width: 100% !important;">
+						<thead>
+							<tr style="text-align: center">
+								<th>년도</th>
+								<th>Code</th>
+								<th>거래처명</th>
+								<th>전년이월</th>
+								<th>거래총액</th>
+								<th>결제총액</th>
+								<th>현재잔액</th>
+								<th>Option</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr th:each="balance : ${balances}">
+								<td th:text="${balance.yyyy}"></td>
+								<td th:text="${balance.vendcode}"></td>
+								<td th:text="${balance.vendname}"
+									th:onclick="'location.href=\''+@{balanceUpdate(yyyy=${balance.yyyy},vendcode=${balance.vendcode})}+'\';'"
+									style="cursor: pointer"></td>
+								<td th:text="${balance.preyybalance}"></td>
+								<td th:text="${balance.dealtot}"></td>
+								<td th:text="${balance.paytot}"></td>
+								<td><input type="text" name="balance"
+									th:value="${balance.balance}" size="3"></td>
+								<td><i class="edit outline icon primary" title="update"
+									id="balanceeditbtn" style=""></i> <i
+									class="trash alternate outline icon red" title="delete"
+									id="balancedeletebtn"></i></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="ui mini modal balancedeletemodal">
+					<div class="header" style="text-align: center">정보 삭제</div>
+					<div class="image content">
+						<img class="image">
+						<div class="description">
+							<p style="text-align: center">삭제 하시겠습니까?</p>
+						</div>
+					</div>
+					<div class="center" style="text-align: center">
+						<button type="button" id="balancemodaldelete">삭제</button>
+						<button type="button" id="balancemodalcancel">취소</button>
+						<p>
+						<p>
+					</div>
+				</div>
+
+				<div class="two wide column"></div>
+				
+				<div class="ui success message" id="successmessage" style="display: none">
+					<div class="header" id="resultmessage"></div>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
+

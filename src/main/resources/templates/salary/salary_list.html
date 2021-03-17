@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout">
+<body>
+<div layout:fragment="content">
+<form class="ui large form" method="POST">
+	<div class="ui grid center aligned">
+		<div class="two wide column">
+		</div>
+		
+		<div class="fluid twelve wide column">
+			<table id="salaryexample" class="display nowrap" style="width:100%  !important;">
+				<thead>
+					<tr style="text-align:center">
+						<th>사원번호</th>
+						<th>부서</th>
+						<th>이름</th>
+						<th>배우자</th>
+						<th>부앙자20</th>
+						<th>부양자60</th>
+						<th>장애자</th>
+						<th>부녀가장</th>
+						<th>급여</th>
+						<th>수당</th>
+						<th>처리유무</th>
+						<th>Option</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="salary : ${salarys}">
+						<td th:text="${salary.empno}" th:onclick="'location.href=\''+@{salaryUpdate(empno=${salary.empno})}+'\';'" style="cursor:pointer"></td>
+						<td th:text="${salary.depart}"></td>
+						<td th:text="${salary.name}"></td>
+						<td th:text="${salary.partner}"></td>
+						<td th:text="${salary.dependent20}"></td>
+						<td th:text="${salary.dependent60}"></td>
+						<td th:text="${salary.disabled}"></td>
+						<td th:text="${salary.womanpower}"></td>
+						<td th:text="${salary.pay}"></td>
+						<td th:text="${salary.extra}"></td>
+						<td style="text-align:center">
+							<select  name="yn" style='width:40px !important;' >
+			  					<option th:each="arryn : ${arryns}" th:selected="${salary.yn eq arryn}" th:text="${arryn}" th:value="${arryn}"></option>
+			  				</select>
+						</td>
+						<td>
+							<i class="edit outline icon positive" title="update" id="salaryeditbtn"></i>
+							<i class="trash alternate outline icon red" title="delete" id="salarydeletebtn"></i>
+						</td>
+					</tr>
+		        </tbody>
+			</table>
+			
+			<div class="ui mini modal salarydelete">
+				<div class="header"  style="text-align:center">정보 삭제</div>
+				<div class="image content">
+					<img class="image">
+					<div class="description">
+						<p  style="text-align:center">삭제 하시겠습니까?</p>
+					</div>
+				</div>
+				<div class="center" style="text-align:center">
+					<button type="button" id="salarydeleteok">삭제</button>
+					<button type="button" id="salarydeletecancel">취소</button>
+					<p><p>
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		<div class="ui success message" id="successmessage" style="display:none">
+            <div class="header" id="resultmessage"></div>
+        </div>
+		
+		<div class="two wide column">
+		</div>
+	</div>
+</form>		
+</div>
+</body>
+</html>
+

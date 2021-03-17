@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout">
+<body>
+<div layout:fragment="content">
+	<div class="ui grid center aligned">
+		<div class="ui one wide column">
+		</div>
+		
+		<div class="fluid ui grid fourteen wide column">
+			<div class="field fluid" style="margin-top:10px;color:#0275db"><h3> <i class="euro sign icon"></i> 매입관리</h3></div>
+			
+			<!--buy left menu begin -->
+			<div class="ui seven wide column  center aligned" style="height:500px;">
+				<form class="ui large form" method="POST" id="buyInsertSave" action="">
+					<div class="field">
+	               		<select  name="vendcode" id="selectvender">
+	               			<option th:each="vender : ${venders}" th:selected="${vender.code eq buy.vendcode}" 
+	               			th:value="${vender.code}" th:text="${vender.name}" ></option>
+		  				</select>
+		            </div>
+		            
+		            <div class="field fluid ui labeled input">
+		               <div class="ui label">매입번호</div>
+		               <input type="text" name="yyyy" th:value="${buy.yyyy}" id="yyyy"> 
+		               <input type="text" name="mm" th:value="${buy.mm}" id="mm"> 
+		               <input type="text" name="dd" th:value="${buy.dd}" id="dd"> 
+		               <input type="text" name="no" th:value="${buy.no}" id="no"> 
+		               <input type="text" name="hang" th:value="${buy.hang}" id="hang">
+		            </div>
+		            
+		            <div class="field">
+		            	<input type="hidden" name="selectedrow" id="selectedrow">
+		            	<input type="hidden" name="hiddenseq" id="hiddenseq">
+		            	<input type="hidden" name="vendname" id="vendname">
+		            	<input type="hidden" name="proname" id="proname">
+		            	<input type="hidden" name="beforeprocode" id="beforeprocode">
+	               		<select name="procode" id="selectproduct">
+		  					<option th:each="product : ${products}" th:selected="${product.code eq buy.procode}" 
+	               			th:value="${product.code}" th:text="${product.name}" ></option>
+		  				</select>
+		            </div>
+		            
+		            <div class="field fluid ui labeled input">
+		               <div class="ui label">단가</div>
+		               <input type="text" name="price" id="price"> 
+		               <input type="hidden" name="beforeprice" id="beforeprice" value="0"> 
+		            </div>
+		            
+		            <div class="field fluid ui labeled input">
+		               <div class="ui label">수량</div>
+		               <input type="text" name="qty" id="qty"> 
+		               <input type="hidden" name="beforeqty" id="beforeqty" value="0"> 
+		            </div>
+		            
+		            <div class="field fluid ui labeled input">
+		               <div class="ui label">합계</div>
+		               <input type="text" name="total" id="total"> 
+		               <input type="hidden" name="beforetotal" id="beforetotal"  value="0"> 
+		            </div>
+		            
+		            <div class="field fluid ui labeled input">
+		               <div class="ui label">비고</div>
+		               <input type="text" name="memo" id="memo"> 
+		            </div>
+		            
+		            <div class="field fluid" id="buysaveupdateGroupsave" style="display:block">
+		            	<span>
+			        		<button class="ui primary button" type="button" onclick="location.href='buyInsert'">
+				            	<i class="creative commons icon"></i> new 
+				          	</button>
+			        	</span>
+		            	<span style="margin-left:50px">
+			        		<button class="ui primary basic button" type="button" id="buysavebtn">
+				            	 <i class="save icon"></i> Save 
+				          	</button>
+			        	</span>
+			        	<span>
+			        		<button class="ui negative basic button" type="button" onclick="location.href='buyInsert'">
+				            	 <i class="share square icon"></i> Cancel 
+				          	</button>
+			        	</span>
+		            </div>
+		            
+		            <div class="field fluid" id="buysaveupdateGroupupdate" style="display:none">
+		            	<div class="ui success message" id="successmessage" style="display:none">
+				            <div class="header" id="resultmessage"></div>
+				        </div>
+				        
+		            	<span>
+			        		<button class="ui primary button" type="button" onclick="location.href='buyInsert'">
+				            	<i class="creative commons icon"></i> new 
+				          	</button>
+			        	</span>
+		            	<span style="margin-left:50px">
+			        		<button class="ui primary basic button" type="button" id="buyupdatebtn">
+				            	 <i class="save icon"></i> Update 
+				          	</button>
+			        	</span>
+			        	<span>
+			        		<button class="ui negative basic button" type="button" id="buydeletebtn">
+				            	 <i class="trash alternate icon"></i> Delete 
+				          	</button>
+			        	</span>
+			        	<span>
+			        		<button class="ui positive basic button" type="button" onclick="location.href='buyInsert'">
+				            	 <i class="share square icon"></i> Cancel 
+				          	</button>
+			        	</span>
+		            </div>
+	        	</form>    
+			</div>
+			<!--buy left menu end -->
+			
+			<!--buy right menu begin -->
+			<div class="ui seven wide column" style="margin-top:10px">
+				<div class="ui fluid labeled input">
+					<input type="text" id="rightvendername" th:value="${buy.vendname}" readonly="readonly">
+				</div>
+				<div style="height:500px;overflow-y: scroll;">
+		        	<table class="ui celled table" id="buyfindtable">
+	                	<thead>
+	                    	<tr>
+	                        	<th style="text-align: center">No</th>
+				                <th style="text-align: center">항번</th>
+				                <th style="text-align: center">품명</th>
+				                <th style="text-align: center">단가</th>
+				                <th style="text-align: center">수량</th>
+				                <th style="text-align: center">금액</th>
+	                    	</tr>
+		                </thead>
+		                <tbody>
+	                    	<tr th:each="buyrollup : ${buyrollups}" style="text-align:center">
+	                    		<td th:if="${buyrollup.hang == 0 && buyrollup.no!=0}">&nbsp</td>
+	                    		<td th:if="${buyrollup.hang == 0 && buyrollup.no!=0}">&nbsp</td>
+	                    		<td th:if="${buyrollup.hang == 0 && buyrollup.no!=0}">&nbsp</td>
+	                    		<td th:if="${buyrollup.hang == 0 && buyrollup.no!=0}" th:text="소계"></td>
+	                    		<td th:if="${buyrollup.hang == 0 && buyrollup.no!=0}" th:text="${buyrollup.qty}"></td>
+	                    		<td th:if="${buyrollup.hang == 0 && buyrollup.no!=0}" th:text="${buyrollup.total}"></td>
+	                    		
+	                    		<td th:if="${buyrollup.hang == 0 && buyrollup.no==0}" >&nbsp</td>
+	                    		<td th:if="${buyrollup.hang == 0 && buyrollup.no==0}">&nbsp</td>
+	                    		<td th:if="${buyrollup.hang == 0 && buyrollup.no==0}">&nbsp</td>
+	                    		<td th:if="${buyrollup.hang == 0 && buyrollup.no==0}" th:text="총계"></td>
+	                    		<td th:if="${buyrollup.hang == 0 && buyrollup.no==0}" th:text="${buyrollup.qty}"></td>
+	                    		<td th:if="${buyrollup.hang == 0 && buyrollup.no==0}" th:text="${buyrollup.total}"></td>
+	                    		
+	                    		<td th:if="${buyrollup.hang != 0 && buyrollup.no!=0}" th:text="${buyrollup.seq}" style="display:none"></td>
+	                    		<td th:if="${buyrollup.hang != 0 && buyrollup.no!=0}" th:text="${buyrollup.no}"></td>
+	                    		<td th:if="${buyrollup.hang != 0 && buyrollup.no!=0}" th:text="${buyrollup.hang}"></td>
+	                    		<td th:if="${buyrollup.hang != 0 && buyrollup.no!=0}" th:text="${buyrollup.proname}" th:value="${buyrollup.seq}" id="buyitemrow" style="cursor:pointer"></td>
+	                    		<td th:if="${buyrollup.hang != 0 && buyrollup.no!=0}" th:text="${buyrollup.price}"></td>
+	                    		<td th:if="${buyrollup.hang != 0 && buyrollup.no!=0}" th:text="${buyrollup.qty}"></td>
+	                    		<td th:if="${buyrollup.hang != 0 && buyrollup.no!=0}" th:text="${buyrollup.total}"></td>
+		                    </tr>
+		                </tbody>
+			         </table>
+				</div>
+				
+				<div class="fluid ui labeled input">
+					<form action="buyFind" method="post" id="buyfindform">
+						<input type="hidden" name="hiddenvendname" id="hiddenvendname">
+						<select class="ui compact dropdown" name="vendcodefind" id="selectvenderfind">
+	                        <option th:each="item:${venders}" th:value="${item.code}" th:text="${item.name}"></option>
+	                    </select>
+						<select class="ui compact  dropdown" name="yyyyfind" >
+		  					<option th:each="yyyy : ${yyyys}" th:selected="${yyyy eq thisyyyy}" th:value="${yyyy}" th:text="${yyyy}"></option>
+		  				</select>
+						<select class="ui compact  dropdown" name="mmfind" >
+		  					<option th:each="mm : ${mms}" th:selected="${mm eq thismm}" th:value="${mm}" th:text="${mm}"></option>
+		  				</select>
+						<select class="ui compact  dropdown" name="ddfind" >
+		  					<option th:each="dd : ${dds}" th:selected="${dd eq thisdd}" th:value="${dd}" th:text="${dd}"></option>
+		  				</select>
+						
+						<button type="button" class="ui primary button" id="findbtnclick"><i class="search icon"></i> 검색</button> 
+					</form>
+				</div>
+				
+			</div>
+			<!--buy right menu end -->
+		</div>
+		
+		<div class="ui mini modal buysavemodal">
+			<div class="header"  style="text-align:center;color:#007bff">저장항목 검사</div>
+			<div class="image content">
+				<img class="image">
+				<div class="description">
+					<p  style="text-align:center"></p>
+				</div>
+			</div>
+			<div class="center" style="text-align:center">
+				<button type="button" class="ui primary button" id="buymodalsavebtn">확인</button>
+				<button type="button" class="ui positive button"  id="buymodalcancelbtn" style="display:none">취소</button>
+				<p><p>
+			</div>
+		</div>
+		
+		<div class="ui mini modal buydeletemodal">
+			<div class="header"  style="text-align:center;color:#007bff">삭제 확인</div>
+			<div class="image content">
+				<img class="image">
+				<div class="description">
+					<p  style="text-align:center">삭제 하시겠습니까?</p>
+				</div>
+			</div>
+			<div class="center" style="text-align:center">
+				<button type="button" class="ui negative button" id="buymodaldeletebtn">삭제</button>
+				<button type="button" class="ui positive button"  id="buymodaldeletecancelbtn">취소</button>
+				<p><p>
+			</div>
+		</div>
+		
+		<div class="ui one wide column">
+		</div>
+	</div>
+		
+</div>
+</body>
+</html>
+
